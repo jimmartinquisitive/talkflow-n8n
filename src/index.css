@@ -1,37 +1,36 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 0 0% 7%;
+    --background: 195 24% 21%;
     --foreground: 0 0% 100%;
     
-    --card: 0 0% 15%;
+    --card: 196 23% 24%;
     --card-foreground: 0 0% 100%;
  
-    --popover: 0 0% 15%;
+    --popover: 196 23% 24%;
     --popover-foreground: 0 0% 100%;
  
-    --primary: 174 89% 49%;
-    --primary-foreground: 0 0% 7%;
+    --primary: 300 38% 85%;
+    --primary-foreground: 195 24% 21%;
  
-    --secondary: 180 9% 25%;
+    --secondary: 201 31% 44%;
     --secondary-foreground: 0 0% 100%;
  
-    --muted: 180 9% 25%;
+    --muted: 201 31% 44%;
     --muted-foreground: 0 0% 63%;
  
-    --accent: 180 9% 25%;
+    --accent: 201 31% 44%;
     --accent-foreground: 0 0% 100%;
  
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 180 9% 25%;
-    --input: 180 9% 25%;
-    --ring: 174 89% 49%;
+    --border: 201 31% 44%;
+    --input: 201 31% 44%;
+    --ring: 300 38% 85%;
  
     --radius: 0.5rem;
   }
@@ -42,7 +41,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-surface-a0 text-foreground;
+    @apply bg-seaQuest-900 text-foreground;
   }
 }
 
@@ -52,25 +51,25 @@
 }
 
 .btn-primary {
-  @apply bg-primary-a0 text-surface-a0 hover:bg-primary-a10;
+  @apply bg-seaQuest-100 text-seaQuest-900 hover:bg-seaQuest-200;
 }
 
 .btn-outline {
-  @apply border border-primary-a0/20 text-primary-a0 hover:bg-primary-a0/10;
+  @apply border border-seaQuest-100/20 text-seaQuest-100 hover:bg-seaQuest-100/10;
 }
 
 /* Chat history styling */
 .chat-history {
-  @apply bg-surface-a10/95;
+  @apply bg-seaQuest-800/95;
 }
 
 .chat-message {
-  @apply bg-surface-a20/95 text-light-a0;
+  @apply bg-seaQuest-700/95 text-seaQuest-50;
 }
 
 /* Dark mode switch styling */
 .dark-mode-switch {
-  @apply flex items-center gap-2 text-light-a0;
+  @apply flex items-center gap-2 text-seaQuest-50;
 }
 
 /* KaTeX styling */
@@ -99,7 +98,7 @@
   white-space: pre-wrap;
   word-break: break-word;
   overflow-wrap: break-word;
-  @apply bg-surface-a20 text-light-a0 rounded-lg p-4;
+  @apply bg-seaQuest-800 text-seaQuest-50 rounded-lg p-4;
 }
 
 .markdown-content p {
@@ -108,14 +107,14 @@
   white-space: pre-wrap;
   word-break: break-word;
   overflow-wrap: break-word;
-  @apply text-light-a0;
+  @apply text-seaQuest-50;
 }
 
 .markdown-content code {
   white-space: pre-wrap;
   word-break: break-word;
   overflow-wrap: break-word;
-  @apply bg-surface-a20 text-primary-a0 rounded px-1;
+  @apply bg-seaQuest-800 text-seaQuest-100 rounded px-1;
 }
 
 /* Ensure proper spacing in markdown content */
