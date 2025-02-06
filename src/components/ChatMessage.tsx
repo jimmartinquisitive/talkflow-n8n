@@ -56,18 +56,11 @@ export const ChatMessage = ({ message }: ChatMessageProps) => {
     >
       <div
         className={cn(
-          "max-w-[85%] rounded-2xl px-4 py-3 transition-all duration-200 hover:-translate-y-1 relative",
+          "max-w-[85%] rounded-2xl px-4 py-3 transition-all duration-200 hover:-translate-y-1",
           isAssistant
-            ? "bg-surface-a10 border border-surface-a30"
-            : "bg-surface-tonal-a10 border border-surface-tonal-a30"
+            ? "bg-surface-a10/95 shadow-lg border border-surface-a30/30"
+            : "bg-surface-tonal-a10/95 shadow-lg border border-surface-tonal-a30/30"
         )}
-        style={{
-          transformStyle: 'preserve-3d',
-          perspective: '1000px',
-          boxShadow: isAssistant 
-            ? '0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1)'
-            : '0 4px 6px -1px rgba(0, 0, 0, 0.15), 0 2px 4px -1px rgba(0, 0, 0, 0.1)'
-        }}
       >
         {isAssistant && (
           <div className="flex items-center gap-2 mb-2">
@@ -114,7 +107,7 @@ export const ChatMessage = ({ message }: ChatMessageProps) => {
             <Button
               variant="ghost"
               size="sm"
-              className="text-surface-a40 hover:text-primary-a0"
+              className="text-surface-a40 hover:text-primary-a0 transition-colors"
               onClick={handleCopy}
             >
               <Copy className="mr-2 h-4 w-4" />
@@ -126,3 +119,4 @@ export const ChatMessage = ({ message }: ChatMessageProps) => {
     </div>
   );
 };
+
