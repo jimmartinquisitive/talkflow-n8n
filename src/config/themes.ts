@@ -10,6 +10,8 @@ export const themes = {
       muted: 'hsl(201 31% 44%)',
       accent: 'hsl(201 31% 44%)',
       border: 'hsl(201 31% 44%)',
+      popover: 'hsl(195 24% 21%)',
+      'popover-foreground': 'hsl(0 0% 100%)',
     }
   },
   seaQuestLight: {
@@ -22,6 +24,8 @@ export const themes = {
       muted: 'hsl(201 31% 44%)',
       accent: 'hsl(201 31% 44%)',
       border: 'hsl(201 31% 44%)',
+      popover: 'hsl(301 38% 85%)',
+      'popover-foreground': 'hsl(195 24% 21%)',
     }
   },
   seaQuestDark: {
@@ -34,6 +38,8 @@ export const themes = {
       muted: 'hsl(201 31% 44%)',
       accent: 'hsl(201 31% 44%)',
       border: 'hsl(201 31% 44%)',
+      popover: 'hsl(195 24% 15%)',
+      'popover-foreground': 'hsl(301 38% 85%)',
     }
   }
 };

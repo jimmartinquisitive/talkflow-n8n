@@ -7,6 +7,7 @@ import { useState, useCallback } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Menu } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 
 interface ChatLayoutProps {
@@ -79,7 +80,8 @@ export const ChatLayout = ({
         </button>
       )}
 
-      <div className="fixed top-4 right-4 z-50">
+      <div className="fixed top-4 right-4 z-50 flex items-center gap-2">
+        <ThemeToggle />
         <ThemeSwitcher />
       </div>
 
