@@ -58,8 +58,8 @@ export const ChatMessage = ({ message }: ChatMessageProps) => {
         className={cn(
           "max-w-[85%] rounded-2xl px-4 py-3 transition-all duration-200 hover:-translate-y-1",
           isAssistant
-            ? "bg-surface-a10/95 shadow-lg border border-surface-a30/30"
-            : "bg-surface-tonal-a10/95 shadow-lg border border-surface-tonal-a30/30"
+            ? "bg-primary-a0/10 shadow-lg border border-primary-a0/20"
+            : "bg-surface-tonal-a30/95 shadow-lg border border-surface-tonal-a40/30"
         )}
       >
         {isAssistant && (
@@ -119,4 +119,3 @@ export const ChatMessage = ({ message }: ChatMessageProps) => {
     </div>
   );
 };
-
