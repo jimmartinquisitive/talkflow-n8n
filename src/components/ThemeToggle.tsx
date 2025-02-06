@@ -15,10 +15,19 @@ export function ThemeToggle() {
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+  }, []);
+
+  useEffect(() => {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    if ((isDark && currentTheme !== 'dark') || (!isDark && currentTheme !== 'light')) {
+      setIsDark(currentTheme === 'dark');
+    }
   }, [isDark]);
 
   const toggleTheme = () => {
-    setIsDark(!isDark);
+    const newIsDark = !isDark;
+    setIsDark(newIsDark);
+    document.documentElement.setAttribute('data-theme', newIsDark ? 'dark' : 'light');
   };
 
   return (
