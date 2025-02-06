@@ -46,6 +46,33 @@
   }
 }
 
+/* Button styling */
+.btn {
+  @apply px-4 py-2 rounded-lg transition-colors duration-200;
+}
+
+.btn-primary {
+  @apply bg-primary-a0 text-surface-a0 hover:bg-primary-a10;
+}
+
+.btn-outline {
+  @apply border border-primary-a0/20 text-primary-a0 hover:bg-primary-a0/10;
+}
+
+/* Chat history styling */
+.chat-history {
+  @apply bg-surface-a10/95;
+}
+
+.chat-message {
+  @apply bg-surface-a20/95 text-light-a0;
+}
+
+/* Dark mode switch styling */
+.dark-mode-switch {
+  @apply flex items-center gap-2 text-light-a0;
+}
+
 /* KaTeX styling */
 .katex {
   font-size: 1.1em !important;
@@ -114,4 +141,3 @@
     font-size: 0.9em !important;
   }
 }
-
