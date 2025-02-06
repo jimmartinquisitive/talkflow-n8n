@@ -1,4 +1,3 @@
-
 import { ChatMessages } from "@/components/chat/ChatMessages";
 import { ChatInput } from "@/components/chat/ChatInput";
 import { ChatSidebar } from "@/components/chat/ChatSidebar";
@@ -7,8 +6,6 @@ import { useState, useCallback } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Menu } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { ThemeToggle } from "@/components/ThemeToggle";
-import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 
 interface ChatLayoutProps {
   sessions: ChatSession[];
@@ -35,21 +32,30 @@ export const ChatLayout = ({
   onToggleFavorite,
   onSendMessage,
 }: ChatLayoutProps) => {
+  // Move all hooks to the top level
   const [input, setInput] = useState("");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [pendingImage, setPendingImage] = useState<File | null>(null);
   const isMobile = useIsMobile();
   const { toast } = useToast();
   
+  // Find current session
   const currentSession = sessions.find(s => s.id === currentSessionId);
 
   const handleSend = useCallback(async (e: React.FormEvent, file?: File) => {
     e.preventDefault();
     if (!input.trim()) return;
 
+    console.log('ChatLayout handleSend called with pending file:', file ? {
+      fileName: file.name,
+      fileSize: file.size,
+      fileType: file.type
+    } : null);
+
     try {
       await onSendMessage(input, file);
       setInput("");
+      console.log('Message sent successfully');
     } catch (error) {
       toast({
         description: "Failed to send message",
@@ -59,6 +65,11 @@ export const ChatLayout = ({
   }, [input, onSendMessage, toast]);
 
   const handleImageSelect = useCallback((file: File) => {
+    console.log('ChatLayout handleImageSelect called with file:', {
+      fileName: file.name,
+      fileSize: file.size,
+      fileType: file.type
+    });
     setPendingImage(file);
   }, []);
 
@@ -79,11 +90,6 @@ export const ChatLayout = ({
           <Menu className="w-5 h-5" />
         </button>
       )}
-
-      <div className="fixed top-4 right-4 z-50 flex items-center gap-2">
-        <ThemeToggle />
-        <ThemeSwitcher />
-      </div>
 
       <ChatSidebar
         sessions={sessions}

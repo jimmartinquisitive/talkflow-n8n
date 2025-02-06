@@ -87,23 +87,20 @@ export const ChatSidebar = ({
   return (
     <div
       className={cn(
-        "w-64 border-r border-surface-a20 bg-surface-a10 flex flex-col absolute md:relative z-40 h-full transition-transform duration-200 ease-in-out",
+        "w-64 border-r bg-sidebar flex flex-col absolute md:relative z-40 h-full transition-transform duration-200 ease-in-out",
         !isSidebarOpen && "-translate-x-full md:translate-x-0"
       )}
     >
-      <div className="p-4 border-b border-surface-a20 flex flex-col gap-4">
+      <div className="p-4 border-b flex flex-col gap-4">
         <Button 
           onClick={() => navigate('/playground')} 
-          className="w-full flex items-center gap-2 bg-surface-a20 hover:bg-surface-a30 text-light-a0"
+          className="w-full flex items-center gap-2"
           variant="outline"
         >
           <Code className="w-4 h-4" />
           Code Playground
         </Button>
-        <Button 
-          onClick={onNewChat} 
-          className="w-full flex items-center gap-2 bg-primary-a0 hover:bg-primary-a10 text-surface-a0"
-        >
+        <Button onClick={onNewChat} className="w-full flex items-center gap-2">
           <PlusCircle className="w-4 h-4" />
           New Chat
         </Button>
@@ -116,9 +113,9 @@ export const ChatSidebar = ({
               key={session.id}
               onClick={() => onSessionSelect(session.id)}
               className={cn(
-                "w-full text-left px-3 py-2 rounded-lg transition-colors group cursor-pointer",
-                "flex items-center gap-2 text-sm relative text-light-a0",
-                session.id === currentSessionId ? "bg-surface-a20" : "hover:bg-surface-a20"
+                "w-full text-left px-3 py-2 rounded-lg hover:bg-sidebar-accent transition-colors group",
+                "flex items-center gap-2 text-sm relative cursor-pointer",
+                session.id === currentSessionId && "bg-sidebar-accent"
               )}
             >
               <MessageSquare className="w-4 h-4 shrink-0" />
@@ -128,13 +125,13 @@ export const ChatSidebar = ({
                     <Input
                       value={editingName}
                       onChange={e => setEditingName(e.target.value)}
-                      className="h-6 text-sm bg-surface-a30 border-surface-a40"
+                      className="h-6 text-sm"
                       autoFocus
                     />
-                    <Button type="submit" size="icon" variant="ghost" className="h-6 w-6 hover:bg-surface-a30">
+                    <Button type="submit" size="icon" variant="ghost" className="h-6 w-6">
                       <Check className="h-4 w-4" />
                     </Button>
-                    <Button type="button" size="icon" variant="ghost" className="h-6 w-6 hover:bg-surface-a30" onClick={cancelEditing}>
+                    <Button type="button" size="icon" variant="ghost" className="h-6 w-6" onClick={cancelEditing}>
                       <X className="h-4 w-4" />
                     </Button>
                   </form>
@@ -155,8 +152,8 @@ export const ChatSidebar = ({
                     variant="ghost"
                     size="icon"
                     className={cn(
-                      "h-6 w-6 hover:bg-surface-a30",
-                      session.favorite && "text-primary-a0 opacity-100"
+                      "h-6 w-6",
+                      session.favorite && "text-yellow-500 opacity-100"
                     )}
                     onClick={(e) => handleToggleFavorite(e, session.id)}
                   >
@@ -165,7 +162,7 @@ export const ChatSidebar = ({
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="h-6 w-6 hover:bg-surface-a30"
+                    className="h-6 w-6"
                     onClick={(e) => startEditing(e, session)}
                   >
                     <Pencil className="h-3 w-3" />

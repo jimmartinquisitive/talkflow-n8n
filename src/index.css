@@ -4,35 +4,63 @@
 
 @layer base {
   :root {
-    --background: 195 24% 21%;
-    --foreground: 0 0% 100%;
-    
-    --card: 196 23% 24%;
-    --card-foreground: 0 0% 100%;
+    --background: 220 14% 96%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
  
-    --popover: 196 23% 24%;
-    --popover-foreground: 0 0% 100%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
  
-    --primary: 300 38% 85%;
-    --primary-foreground: 195 24% 21%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
  
-    --secondary: 201 31% 44%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
  
-    --muted: 201 31% 44%;
-    --muted-foreground: 0 0% 63%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
  
-    --accent: 201 31% 44%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
  
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
 
-    --border: 201 31% 44%;
-    --input: 201 31% 44%;
-    --ring: 300 38% 85%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
  
     --radius: 0.5rem;
+  }
+ 
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+ 
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+ 
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+ 
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+ 
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+ 
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+ 
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+ 
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
   }
 }
  
@@ -41,35 +69,8 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground transition-colors duration-200;
+    @apply bg-background text-foreground;
   }
-}
-
-/* Button styling */
-.btn {
-  @apply px-4 py-2 rounded-lg transition-colors duration-200;
-}
-
-.btn-primary {
-  @apply bg-seaQuest-100 text-seaQuest-900 hover:bg-seaQuest-200;
-}
-
-.btn-outline {
-  @apply border border-seaQuest-100/20 text-seaQuest-100 hover:bg-seaQuest-100/10;
-}
-
-/* Chat history styling */
-.chat-history {
-  @apply bg-seaQuest-800/95;
-}
-
-.chat-message {
-  @apply bg-seaQuest-700/95 text-seaQuest-50;
-}
-
-/* Dark mode switch styling */
-.dark-mode-switch {
-  @apply flex items-center gap-2 text-seaQuest-50;
 }
 
 /* KaTeX styling */
@@ -98,7 +99,6 @@
   white-space: pre-wrap;
   word-break: break-word;
   overflow-wrap: break-word;
-  @apply bg-seaQuest-800 text-seaQuest-50 rounded-lg p-4;
 }
 
 .markdown-content p {
@@ -107,14 +107,12 @@
   white-space: pre-wrap;
   word-break: break-word;
   overflow-wrap: break-word;
-  @apply text-seaQuest-50;
 }
 
 .markdown-content code {
   white-space: pre-wrap;
   word-break: break-word;
   overflow-wrap: break-word;
-  @apply bg-seaQuest-800 text-seaQuest-100 rounded px-1;
 }
 
 /* Ensure proper spacing in markdown content */
