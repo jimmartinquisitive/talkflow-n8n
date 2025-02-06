@@ -1,44 +1,46 @@
-
 import { Moon, Sun } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { useEffect, useState } from "react";
 
 export function ThemeToggle() {
   const [isDark, setIsDark] = useState(() => {
+    // Initialize with system preference or existing class
     if (typeof window !== 'undefined') {
-      const hasDarkClass = document.documentElement.getAttribute('data-theme') === 'dark';
+      const hasDarkClass = document.documentElement.classList.contains("dark");
       const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
       return hasDarkClass || prefersDark;
     }
-    return false;
+    return true; // Default to dark mode
   });
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+    // Set initial theme class
+    document.documentElement.classList.toggle("dark", isDark);
   }, []);
 
   useEffect(() => {
-    const currentTheme = document.documentElement.getAttribute('data-theme');
-    if ((isDark && currentTheme !== 'dark') || (!isDark && currentTheme !== 'light')) {
-      setIsDark(currentTheme === 'dark');
+    // Sync the UI with the actual theme state
+    const isDarkMode = document.documentElement.classList.contains("dark");
+    if (isDark !== isDarkMode) {
+      setIsDark(isDarkMode);
     }
   }, [isDark]);
 
   const toggleTheme = () => {
     const newIsDark = !isDark;
     setIsDark(newIsDark);
-    document.documentElement.setAttribute('data-theme', newIsDark ? 'dark' : 'light');
+    document.documentElement.classList.toggle("dark", newIsDark);
   };
 
   return (
-    <div className="theme-toggle">
-      <Sun className="theme-icon" />
+    <div className="flex items-center gap-2">
+      <Sun className="h-4 w-4" />
       <Switch
         checked={isDark}
         onCheckedChange={toggleTheme}
         aria-label="Toggle dark mode"
       />
-      <Moon className="theme-icon" />
+      <Moon className="h-4 w-4" />
     </div>
   );
 }
