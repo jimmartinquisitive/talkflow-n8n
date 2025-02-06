@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -19,15 +20,41 @@ export default {
 		},
 		extend: {
 			colors: {
+				dark: {
+					a0: "#000000",
+				},
+				light: {
+					a0: "#ffffff",
+				},
+				primary: {
+					a0: "#0af0e1",
+					a10: "#51f2e4",
+					a20: "#72f4e8",
+					a30: "#8cf6eb",
+					a40: "#a2f8ee",
+					a50: "#b7faf1",
+				},
+				surface: {
+					a0: "#121212",
+					a10: "#282828",
+					a20: "#3f3f3f",
+					a30: "#575757",
+					a40: "#717171",
+					a50: "#8b8b8b",
+				},
+				"surface-tonal": {
+					a0: "#203835",
+					a10: "#364b48",
+					a20: "#4c605d",
+					a30: "#647572",
+					a40: "#7c8a88",
+					a50: "#95a19f",
+				},
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
-				primary: {
-					DEFAULT: 'hsl(var(--primary))',
-					foreground: 'hsl(var(--primary-foreground))'
-				},
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
 					foreground: 'hsl(var(--secondary-foreground))'
@@ -52,16 +79,6 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				sidebar: {
-					DEFAULT: 'hsl(var(--sidebar-background))',
-					foreground: 'hsl(var(--sidebar-foreground))',
-					primary: 'hsl(var(--sidebar-primary))',
-					'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-					accent: 'hsl(var(--sidebar-accent))',
-					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-					border: 'hsl(var(--sidebar-border))',
-					ring: 'hsl(var(--sidebar-ring))'
-				}
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -70,20 +87,12 @@ export default {
 			},
 			keyframes: {
 				'accordion-down': {
-					from: {
-						height: '0'
-					},
-					to: {
-						height: 'var(--radix-accordion-content-height)'
-					}
+					from: { height: '0' },
+					to: { height: 'var(--radix-accordion-content-height)' }
 				},
 				'accordion-up': {
-					from: {
-						height: 'var(--radix-accordion-content-height)'
-					},
-					to: {
-						height: '0'
-					}
+					from: { height: 'var(--radix-accordion-content-height)' },
+					to: { height: '0' }
 				}
 			},
 			animation: {

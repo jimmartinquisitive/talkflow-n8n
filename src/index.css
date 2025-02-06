@@ -1,66 +1,39 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 220 14% 96%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --background: 0 0% 7%;
+    --foreground: 0 0% 100%;
+    
+    --card: 0 0% 15%;
+    --card-foreground: 0 0% 100%;
  
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 15%;
+    --popover-foreground: 0 0% 100%;
  
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 174 89% 49%;
+    --primary-foreground: 0 0% 7%;
  
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 180 9% 25%;
+    --secondary-foreground: 0 0% 100%;
  
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 180 9% 25%;
+    --muted-foreground: 0 0% 63%;
  
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 180 9% 25%;
+    --accent-foreground: 0 0% 100%;
  
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 180 9% 25%;
+    --input: 180 9% 25%;
+    --ring: 174 89% 49%;
  
     --radius: 0.5rem;
-  }
- 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
- 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
- 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
- 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
- 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
- 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
- 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
- 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
   }
 }
  
@@ -69,7 +42,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-surface-a0 text-foreground;
   }
 }
 
@@ -99,6 +72,7 @@
   white-space: pre-wrap;
   word-break: break-word;
   overflow-wrap: break-word;
+  @apply bg-surface-a20 text-light-a0 rounded-lg p-4;
 }
 
 .markdown-content p {
@@ -107,12 +81,14 @@
   white-space: pre-wrap;
   word-break: break-word;
   overflow-wrap: break-word;
+  @apply text-light-a0;
 }
 
 .markdown-content code {
   white-space: pre-wrap;
   word-break: break-word;
   overflow-wrap: break-word;
+  @apply bg-surface-a20 text-primary-a0 rounded px-1;
 }
 
 /* Ensure proper spacing in markdown content */
