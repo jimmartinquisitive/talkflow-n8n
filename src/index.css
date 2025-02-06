@@ -41,7 +41,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-seaQuest-900 text-foreground;
+    @apply bg-background text-foreground transition-colors duration-200;
   }
 }
 
