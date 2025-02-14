@@ -22,6 +22,12 @@ export const useMessageSender = (
     currentMessages: Message[],
     file?: File
   ) => {
+    console.log('Starting message send process', {
+      hasFile: !!file,
+      messageCount: currentMessages.length,
+      sessionId
+    });
+
     const effectiveWebhookUrl = window.env?.VITE_N8N_WEBHOOK_URL || import.meta.env.VITE_N8N_WEBHOOK_URL;
     const username = window.env?.VITE_N8N_WEBHOOK_USERNAME || import.meta.env.VITE_N8N_WEBHOOK_USERNAME;
     const secret = window.env?.VITE_N8N_WEBHOOK_SECRET || import.meta.env.VITE_N8N_WEBHOOK_SECRET;
@@ -35,14 +41,27 @@ export const useMessageSender = (
     setIsTyping(true);
 
     try {
-      console.log('Processing file for message:', file ? {
-        name: file.name,
-        type: file.type,
-        size: file.size
-      } : 'No file');
+      // Deep clone the current messages to avoid reference issues
+      const safeCurrentMessages = JSON.parse(JSON.stringify(currentMessages));
+      console.log('Current messages state:', {
+        count: safeCurrentMessages.length,
+        lastMessage: safeCurrentMessages[safeCurrentMessages.length - 1]?.id
+      });
+
+      if (file) {
+        console.log('Processing file:', {
+          name: file.name,
+          type: file.type,
+          size: file.size
+        });
+      }
 
       const fileData = file ? await prepareFileData(file) : null;
-      console.log('File data prepared:', fileData ? 'Successfully processed' : 'No file data');
+      console.log('File processing result:', {
+        success: !!fileData,
+        mimeType: fileData?.mimeType,
+        dataSize: fileData?.data.length
+      });
 
       const userMessage: Message = {
         id: uuidv4(),
@@ -52,7 +71,18 @@ export const useMessageSender = (
         ...(fileData && { imageData: fileData })
       };
 
-      const newMessages = [...currentMessages, userMessage];
+      console.log('Created user message:', {
+        id: userMessage.id,
+        hasImage: !!userMessage.imageData
+      });
+
+      const newMessages = [...safeCurrentMessages, userMessage];
+      console.log('New messages array created:', {
+        oldCount: safeCurrentMessages.length,
+        newCount: newMessages.length
+      });
+
+      // Update UI before API call
       updateSession(sessionId, newMessages);
       queryClient.setQueryData(['chatSessions', sessionId], newMessages);
 
@@ -66,12 +96,7 @@ export const useMessageSender = (
         headers['Authorization'] = `Basic ${base64Auth}`;
       }
 
-      console.log('Sending message to webhook:', {
-        url: effectiveWebhookUrl.split('/webhook/')[0] + '/webhook/[WEBHOOK_ID]',
-        hasAuth: !!username && !!secret,
-        hasFile: !!fileData
-      });
-
+      console.log('Sending request to webhook...');
       const response = await fetchWithTimeout(
         effectiveWebhookUrl,
         {
@@ -90,6 +115,11 @@ export const useMessageSender = (
         FETCH_TIMEOUT
       );
 
+      console.log('Webhook response received:', {
+        status: response.status,
+        ok: response.ok
+      });
+
       const responseData = await handleApiResponse(response);
 
       if (!response.ok) {
@@ -101,6 +131,9 @@ export const useMessageSender = (
       }
 
       const responseContent = extractResponseContent(responseData);
+      console.log('Extracted response content:', {
+        contentLength: responseContent.length
+      });
 
       const assistantMessage: Message = {
         id: uuidv4(),
@@ -109,15 +142,21 @@ export const useMessageSender = (
         timestamp: Date.now(),
       };
 
+      // Create final messages array and update UI
       const finalMessages = [...newMessages, assistantMessage];
+      console.log('Final messages state:', {
+        count: finalMessages.length,
+        lastMessageId: assistantMessage.id
+      });
+
       updateSession(sessionId, finalMessages);
       queryClient.setQueryData(['chatSessions', sessionId], finalMessages);
       
-      console.log('Message sent successfully');
+      console.log('Message send process completed successfully');
       return true;
 
     } catch (error) {
-      console.error('Error in webhook request:', error);
+      console.error('Error in message send process:', error);
       toast.error("Failed to send message. Please try again.");
       return false;
 
