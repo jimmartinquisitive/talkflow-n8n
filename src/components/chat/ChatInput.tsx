@@ -1,7 +1,7 @@
 
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Loader2, Send, Mic, X } from "lucide-react";
 import { useSpeechRecognition } from "@/hooks/useSpeechRecognition";
 import { ImageUpload } from "./ImageUpload";
@@ -29,6 +29,15 @@ export const ChatInput = ({
     onTranscript: (transcript) => onInputChange(input + transcript)
   });
 
+  // Cleanup image URL when component unmounts or when previewImage changes
+  useEffect(() => {
+    return () => {
+      if (previewImage?.url) {
+        URL.revokeObjectURL(previewImage.url);
+      }
+    };
+  }, [previewImage]);
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
@@ -46,10 +55,12 @@ export const ChatInput = ({
       const result = await onSend(e, previewImage?.file);
       
       if (result !== false) {
-        if (previewImage) {
+        // Clean up the old image URL before removing the preview
+        if (previewImage?.url) {
           URL.revokeObjectURL(previewImage.url);
-          setPreviewImage(null);
         }
+        setPreviewImage(null);
+        
         // Refocus the textarea after successful send
         setTimeout(() => {
           textareaRef.current?.focus();
@@ -84,11 +95,20 @@ export const ChatInput = ({
         return;
       }
 
+      // Clean up old image URL if it exists
+      if (previewImage?.url) {
+        URL.revokeObjectURL(previewImage.url);
+      }
       handleImageSelection(file);
     }
   };
 
   const handleImageSelection = (file: File) => {
+    // Clean up old image URL if it exists
+    if (previewImage?.url) {
+      URL.revokeObjectURL(previewImage.url);
+    }
+    
     const imageUrl = URL.createObjectURL(file);
     setPreviewImage({ file, url: imageUrl });
     
@@ -100,7 +120,7 @@ export const ChatInput = ({
   };
 
   const clearPreviewImage = () => {
-    if (previewImage) {
+    if (previewImage?.url) {
       URL.revokeObjectURL(previewImage.url);
       setPreviewImage(null);
     }
