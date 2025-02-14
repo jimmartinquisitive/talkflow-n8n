@@ -49,6 +49,10 @@ export const ChatInput = ({
           URL.revokeObjectURL(previewImage.url);
           setPreviewImage(null);
         }
+        // Refocus the textarea after successful send
+        setTimeout(() => {
+          textareaRef.current?.focus();
+        }, 0);
       }
     } catch (err) {
       console.error('Failed to send message:', err);
@@ -90,6 +94,8 @@ export const ChatInput = ({
     if (onImageSelect) {
       onImageSelect(file);
     }
+    // Refocus textarea after image selection
+    textareaRef.current?.focus();
   };
 
   const clearPreviewImage = () => {
@@ -97,6 +103,8 @@ export const ChatInput = ({
       URL.revokeObjectURL(previewImage.url);
       setPreviewImage(null);
     }
+    // Refocus textarea after clearing image
+    textareaRef.current?.focus();
   };
 
   const isInputEmpty = !input.trim() && !previewImage?.file;
