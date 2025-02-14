@@ -31,19 +31,22 @@ export const useMessageSender = (
       return false;
     }
 
-    try {
-      setIsLoading(true);
-      setIsTyping(true);
+    // Reset states at the start
+    setIsLoading(true);
+    setIsTyping(true);
 
+    let fileData = null;
+    try {
       console.log('Processing file for message:', file ? {
         name: file.name,
         type: file.type,
         size: file.size
       } : 'No file');
 
-      const fileData = file ? await prepareFileData(file) : null;
-
-      console.log('File data prepared:', fileData ? 'Successfully processed' : 'No file data');
+      if (file) {
+        fileData = await prepareFileData(file);
+        console.log('File data prepared:', fileData ? 'Successfully processed' : 'No file data');
+      }
 
       const userMessage: Message = {
         id: uuidv4(),
@@ -53,7 +56,10 @@ export const useMessageSender = (
         ...(fileData && { imageData: fileData })
       };
 
+      // Create a new array instead of modifying the existing one
       const newMessages = [...currentMessages, userMessage];
+      
+      // Update local state first
       updateSession(sessionId, newMessages);
       queryClient.setQueryData(['chatSessions', sessionId], newMessages);
 
@@ -110,19 +116,30 @@ export const useMessageSender = (
         timestamp: Date.now(),
       };
 
+      // Create a new array for final messages
       const finalMessages = [...newMessages, assistantMessage];
+      
+      // Update UI with the complete conversation
       updateSession(sessionId, finalMessages);
       queryClient.setQueryData(['chatSessions', sessionId], finalMessages);
       
       console.log('Message sent successfully');
       return true;
+
     } catch (error) {
       console.error('Error in webhook request:', error);
       toast.error("Failed to send message. Please try again.");
       return false;
+
     } finally {
+      // Ensure states are reset regardless of success or failure
       setIsLoading(false);
       setIsTyping(false);
+      
+      // Clean up any file data
+      if (fileData) {
+        fileData = null;
+      }
     }
   };
 
